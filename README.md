@@ -137,7 +137,7 @@ npm install
 
 npm run dev
 
-# 4️⃣ Start the frontend (if React)
+# 4️⃣ Start the frontend
 
 cd client<br>
 npm install<br>
@@ -176,14 +176,13 @@ Filter results by threat type or risk level
 We welcome contributions!
 Feel free to fork this repo, make changes, and submit a pull request.
 For major changes, open an issue first to discuss what you would like to change.
+-- Team APT-91
 
 <h2>👨‍💻 Team Members</h2>
 
 Ketan Dav (Team Lead)<br>
-Devansh Deshpande<br>
-Dharm Patel<br>
 Aksh Patel<br>
-Devarsh Dalwadi
+Sahil Chandel
 
 <h2>📚 References</h2>
 
