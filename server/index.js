@@ -9,7 +9,7 @@ import fs from "fs";
 import path from "path";
 import { parse } from "csv-parse/sync";
 import axios from "axios";
-import { constrainedMemory } from "process";
+import nodemailer from "nodemailer";
 
 // --- Endpoint Log Schemas and Models ---
 const endpointLogSchema = new mongoose.Schema(
@@ -40,6 +40,33 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// --- Email ALERT Utility --- (Gmail example)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    // Better: keep these in .env
+    user: process.env.ALERT_EMAIL_USER || "your@gmail.com",
+    pass: process.env.ALERT_EMAIL_PASS || "your-app-password",
+  },
+});
+
+function sendAdminAlert(subject, body) {
+  const mailOptions = {
+    from: process.env.ALERT_EMAIL_FROM || "your@gmail.com",
+    to: process.env.ALERT_EMAIL_TO || "admin@example.com",
+    subject,
+    text: body,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Failed to send alert email:", error);
+    } else {
+      console.log("----> EMAIL ALERT SENT TO ADMIN:", info.response);
+    }
+  });
+}
 
 const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 async function getGeminiResponse(inputLog) {
@@ -188,6 +215,7 @@ setInterval(async () => {
     console.log(webserverLog);
 
     if (!firewallLog && !webserverLog && !idsLog) return;
+
     // Normalize fields so source_ip, dest_ip, protocol always exist
     const mergedLog = {
       source_ip:
@@ -218,6 +246,7 @@ setInterval(async () => {
       ...webserverLog?._doc,
       ...idsLog?._doc,
     };
+
     // --- Feature extraction ---
     const featureColumns = [
       "Source Port",
@@ -344,6 +373,12 @@ setInterval(async () => {
       }
       await LogModel.create({ log: mergedLog, verdict });
       console.log("CUSTOM ML LOGGING: Added malicious log + Gemini verdict");
+
+      // EMAIL ADMIN ALERT (same idea as second code)
+      sendAdminAlert(
+        "IDS ALERT: High Risk Packet Detected",
+        `A high risk packet was detected!\nDetails:\n${logString}`
+      );
     } else {
       await LogModel.create({
         log: mergedLog,
