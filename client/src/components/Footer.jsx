@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div>Made  by</div>
-      <div>Ketan & Devarsh</div>
+      <div>Ketan, Aksh & Sahil</div>
     </footer>
   );
 }

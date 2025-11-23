@@ -2,16 +2,22 @@ import Navbar from "../components/Navbar";
 
 const team = [
   {
-    name: "Devarsh Dalwadi",
+    name: "Aksh Patel",
     skills: ["ML", "DBMS","CyberSec"],
-    linkedin: "https://www.linkedin.com/in/devarshdalwadi/",
-    photo: 'devarsh.jpg',
+    linkedin: "https://www.linkedin.com/in/aksh-patel158/",
+    photo: 'aksh.jpg',
   },
   {
     name: "Ketan Dav",
     skills: ["APIs", "MongoDB", "React","ML"],
     linkedin: "https://www.linkedin.com/in/ketandav/",
     photo: 'ketan.jpg',
+  },
+  {
+    name: "Sahil Chandel",
+    skills: ["Web Dev", "React", "CyberSec"],
+    linkedin: "https://www.linkedin.com/in/sahil-chandel-781486284/",
+    photo: 'sahilchandel.png',
   },
 ];
 
