@@ -125,7 +125,7 @@ Dataset: CICIDS 2017 (Combined & Preprocessed)
 
 # 1️⃣ Clone the repo
 
-git clone https://github.com/devansh436/threat-detection.git<Br>
+git clone https://github.com/KetanDav/ai-powered-ids.git<Br>
 cd threat-detection
 
 # 2️⃣ Install backend dependencies
