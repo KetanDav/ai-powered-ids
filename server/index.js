@@ -48,6 +48,8 @@ const transporter = nodemailer.createTransport({
     // Better: keep these in .env
     user: process.env.ALERT_EMAIL_USER || "your@gmail.com",
     pass: process.env.ALERT_EMAIL_PASS || "your-app-password",
+
+
   },
 });
 
@@ -55,6 +57,8 @@ function sendAdminAlert(subject, body) {
   const mailOptions = {
     from: process.env.ALERT_EMAIL_FROM || "your@gmail.com",
     to: process.env.ALERT_EMAIL_TO || "admin@example.com",
+
+    
     subject,
     text: body,
   };

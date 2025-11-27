@@ -17,6 +17,8 @@ if (!csvFilePath) {
 // --- Define strict schema (no Label field) ---
 const idsLogSchema = new mongoose.Schema(
   {
+
+    
     Source_IP: String,
     Destination_IP: String,
     Flow_ID: String,
